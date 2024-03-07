@@ -24,7 +24,10 @@
   </div>
 </div>
 
-<% @user.own_photos.each do |photo| %>
-  <%= render "photos/photo", photo: photo %>
+<% @user.followers.each do |follower| %>
+  <ul>
+    <li>
+      <%= link_to follower.username, following_path(follower.username), class: "nav-link" %>
+    </li>
+  </ul>
 <% end %>
-</ul>
