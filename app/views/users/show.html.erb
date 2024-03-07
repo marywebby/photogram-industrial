@@ -7,26 +7,25 @@
 <ul>
   <% current_user.own_photos.each do |photo| %>
     <div class="row mb-4">
-    <div class="col-md-6 offset-md-3">
-      <div class="card">
-        <%= image_tag photo.image, class: "card-img-top" %>
-        <div class="card-body">
-          <h5 class="card-title"><%= photo.owner.username %></h5>
-          <p class="card-text"><%= photo.caption %></p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <% photo.comments.each do |comment| %>
-            <li class="list-group-item">
-              <%= comment.body %>
-            </li>
-          <% end %>
-        </ul>
-        <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <%= image_tag photo.image, class: "card-img-top" %>
+          <div class="card-body">
+            <h5 class="card-title"><%= photo.owner.username %></h5>
+            <p class="card-text"><%= photo.caption %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <% photo.comments.each do |comment| %>
+              <li class="list-group-item">
+                <%= comment.body %>
+              </li>
+            <% end %>
+          </ul>
+          <div class="card-body">
+          <%= render "comments/form", comment: Comment.new(photo_id: photo.id) %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   <% end %>
 </ul>
