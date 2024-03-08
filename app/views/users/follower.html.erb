@@ -14,20 +14,57 @@
       <li class="nav-item">
         <%= link_to "Feed", feed_path(@user.username), class: "nav-link" %>
       </li>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#followersModal">
+          Followers
+        </button>
       <li class="nav-item">
-        <%= link_to "Followers", followers_path(@user.username), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Following", following_path(@user.username), class: "nav-link" %>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#followingModal">
+          Following
+        </button>
       </li>
     </ul>
   </div>
 </div>
 
-<% @user.followers.each do |follower| %>
-  <ul>
-    <li>
-      <%= link_to follower.username, following_path(follower.username), class: "nav-link" %>
-    </li>
-  </ul>
-<% end %>
+<div class="modal fade" id="followingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Following</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <% @user.followers.each do |follower| %>
+          <ul>
+            <li>
+              <%= link_to follower.username, following_path(follower.username), class: "nav-link" %>
+            </li>
+          </ul>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="modal fade" id="followersModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Following</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <% @user.leaders.each do |leader| %>
+          <ul>
+            <li>
+              <%= link_to leader.username, user_path(leader.username), class: "nav-link" %>
+            </li>
+          </ul>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
